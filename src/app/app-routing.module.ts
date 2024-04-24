@@ -1,23 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { InicioComponent } from './inicio/inicio.component';
-import { GaleriaComponent } from './galeria/galeria.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { InicioComponent } from './modules/inicio/pages/inicio/inicio.component';
 
+// Encargadas de tener todas las rutas
 const routes: Routes = [
+
+  //Ruta comun --> 1 solo componente
   {
-    path:'inicio',
+    path:"",
     component:InicioComponent
   },
+  //Carga perezosa --> 1 modulo
+  //loadChildre indica una ruta hija
+  //()=>import: ruta de donde viene el modulo
+  //.then:promesa/ funcion asincronica
   {
-    path:'galeria',
-    component:GaleriaComponent
-  },
-  {
-    path:'**',
-    component:PageNotFoundComponent
+    path:"",loadChildren:()=>import('./modules/inicio/inicio.module').then(m=>m.InicioModule)
   }
-
 ];
 
 @NgModule({
