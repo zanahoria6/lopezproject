@@ -1,0 +1,12 @@
+.example-spacer {
+    flex: 1 1 auto;
+  } 
+
+.navbar-button{
+    margin-left: 40px;
+    margin-top: 5px;
+}
+.navbar-button2{
+    margin-left: 10px;
+    margin-top: 5px;
+}
