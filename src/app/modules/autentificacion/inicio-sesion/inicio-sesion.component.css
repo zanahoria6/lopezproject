@@ -1,0 +1,15 @@
+.container{
+    display: flex;
+    padding: 10px;
+    text-align: center;
+    justify-content: center;
+}
+
+.boton{
+    width: 120px;
+    margin: auto;
+}
+.row{
+    display: flex;
+    flex-direction: column;
+}

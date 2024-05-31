@@ -8,21 +8,28 @@ import { Usuario } from 'src/app/models/usuario';
 })
 export class InicioSesionComponent {
   hide = true;
-iniciarSesion(){
-  const credenciales={
 
+public coleccion:Usuario[]=[
+  {
+    uid:"",
+    nombre:"",
+    apellido: "",
+    email:'',
+    password:'',
+    rol:""
   }
-}
+]
 
-public sesion:Usuario[]
+
+
 constructor(){
-  this.sesion=[
+  this.coleccion=[
     {
       uid:"1",
       nombre:"Rodrigo",
       apellido: "Morales",
       email:'rodrigo@gmail.com',
-      password:'12345',
+      password:'123456',
       rol:"admin"
     },
     {
@@ -30,9 +37,23 @@ constructor(){
       nombre:"Santiago",
       apellido: "Ramirez",
       email:'santiago@gmail.com',
-      password:'67890',
+      password:'567890',
       rol:"visitante"
     }
   ]
 }
+
+loginMail: string=""
+loginPassword: string=""
+
+buscar(){
+
+  const usuarioEncontrado =this.coleccion.find((nombre)=>nombre.email===this.loginMail&&nombre.password)
+  if (usuarioEncontrado){
+    alert("usuario encontrado: "+usuarioEncontrado.nombre)
+  }else{
+    alert("inicio fallido")
+  }
+
+  }
 }
