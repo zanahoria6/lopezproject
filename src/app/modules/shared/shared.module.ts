@@ -23,6 +23,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
     CommonModule,
     MatToolbarModule,
     MatButtonModule,
+    //Componentes importados de material
     MatIconModule,
     AppRoutingModule,
     MatMenuModule
@@ -32,6 +33,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
     FooterComponent,
     MatToolbarModule,
     MatButtonModule,
+    //Componentes exportados de material
     MatIconModule,
     MatMenuModule
   ]

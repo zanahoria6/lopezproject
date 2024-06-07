@@ -41,12 +41,11 @@ export class RegistroComponent {
 
     alert("Te registraste con exito");
 
+    //al terminar la funcion, limpio los inputs
     this.limpiarInputs();
-    //por consola
-    // console.log(credenciales);
-    // console.log(this.coleccionUsuarios);
   }
   
+  //creo una funcion para limpiar los inputs
   limpiarInputs(){
     const inputs={
       uid:this.usuarios.uid='',

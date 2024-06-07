@@ -1,3 +1,4 @@
+//creo la interfaz "Productos"
 export interface Productos {
     id:string;
     imagen:string;

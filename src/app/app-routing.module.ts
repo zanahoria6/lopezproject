@@ -10,7 +10,7 @@ const routes: Routes = [
   //carga peresosa -> 1 solo modulo
   //loadChildren indica una ruta hija
   //()=> ruta de donde vien el modulo 
-  // then es una funcion asincronica/promesa que espera uns configuracion del exterior y lo que hace es "este bien o mal nos va a devolver algo"
+  // then es una funcion asincronica/promesa que espera una configuracion del exterior y lo que hace es "este bien o mal nos va a devolver algo"
   {
     path: "", loadChildren: () => import('./modules/inicio/inicio.module').then(m => m.InicioModule)
   },
