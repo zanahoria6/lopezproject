@@ -10,9 +10,9 @@ import { SharedModule } from './modules/shared/shared.module';
 
 //VINCULACIONES / IMPORTACIONES CON FIREBASE
 import { environment } from 'src/environment/environment';
-import{AngularFireModule} from '@angular/fire/compat';
-import {AngularFireAuthModule} from '@angular/fire/compat/auth';
-import {AngularFireStorageModule} from '@angular/fire/compat/storage';
+import{AngularFireModule} from '@angular/fire/compat'; //es para el Cloud FireStore
+import {AngularFireAuthModule} from '@angular/fire/compat/auth'; //es para la autentificacion
+import {AngularFireStorageModule} from '@angular/fire/compat/storage'; //es para la BD de archivos e imagenes
 
 @NgModule({
   declarations: [
@@ -30,6 +30,7 @@ import {AngularFireStorageModule} from '@angular/fire/compat/storage';
     //autentificacion
     AngularFireAuthModule,
     //storage -> BD de imagenes 
+    AngularFireStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
