@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
 
+import { AuthService } from '../services/auth.service';
+import { FirestoreService } from '../../shared/services/firestore.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-inicio-sesion',
   templateUrl: './inicio-sesion.component.html',
@@ -9,35 +13,61 @@ import { Usuario } from 'src/app/models/usuario';
 export class InicioSesionComponent {
   //booleano para ocultar la contraseña
   hide = true;
-
+  
+/*
   //############################### Inicio local
   //definimos la coleccion local
-  public usuariosRegistrados: Usuario[] = []
+   public usuariosRegistrados: Usuario[] = []
 
   //coleccion local de usuarios de informacion
-  constructor() {
-    this.usuariosRegistrados = [
-      {
-        uid: "1",
-        nombre: "tomas",
-        apellido: "lopez",
-        email: "lopezruiztomas59@gmail.com",
-        rol: "admin",
-        password: "123456"
-      },
-      {
-        uid: "2",
-        nombre: "agustin",
-        apellido: "fuentes",
-        email: "fuentesagustin@gmail.com",
-        rol: "visitante",
-        password: "123456"
-      }
-    ]
-  }
 
   //############################### Fin local
+*/
+  
+constructor(
+    public servicioAuth: AuthService,
+    public servicioFirestore: FirestoreService,
+    public servicioRutas: Router
+  ){}
 
+  usuariosIngresados: Usuario = {
+    uid: "",
+    nombre: "",
+    apellido: "",
+    email: "",
+    rol: "",
+    password: ""
+
+  }
+
+  async IniciarSesion(){
+    const credenciales={
+      email:this.usuariosIngresados.email,
+      password:this.usuariosIngresados.password
+    }
+
+    const res = await this.servicioAuth.iniciarSesion(credenciales.email,credenciales.password)
+    .then (res=>{
+      alert ('Se ha logueado con exito');
+
+      this.servicioRutas.navigate(['/inicio'])
+    })
+    .catch(err=>{
+      alert('Hubo un problema al iniciar sesion')
+
+      this.limpiarInputs();
+    })
+  }
+
+  //funcion para vaciar el formulario
+  limpiarInputs() {
+    const inputs = {
+      email: this.usuariosIngresados.email = '',
+      password: this.usuariosIngresados.password = ''
+    }
+  }
+
+  /*
   //############################### Inicio Registrado
 
   //importamos la interfaz de usuario e inicializamos vacio
@@ -67,4 +97,6 @@ export class InicioSesionComponent {
   }
 
   //############################### Fin registrado
+
+  */
 }
