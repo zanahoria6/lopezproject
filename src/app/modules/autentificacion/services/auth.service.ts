@@ -9,7 +9,6 @@ export class AuthService {
 //REFERENCIAR AUTH DE FIREBASE PARA INICIALIZARLO
   constructor(public auth:AngularFireAuth) { }
   
-  //funcion para tomar UID
 
   //funcion para registro
   registrar(email:string, password:string){
@@ -27,5 +26,23 @@ export class AuthService {
   cerrarSesion(){
     //devolver una promesa vacia
     return this.auth.signOut();
+  }
+
+  //funcion para tomar UID
+  async obtenerUid(){
+
+    //nos va a generear una promesa, y la constante la va a capturar
+    //las promesas tienen dos resultados: resuelta o rechazada
+    const user = await this.auth.currentUser;
+
+    /* 
+    Si el usuario no respeta la estructura de la interfaz/
+    Si tuvo problemas para el registro, vease tener mal internet
+     */
+    if (user==null){
+      return null;
+    } else{
+      return user.uid;
+    }
   }
 }

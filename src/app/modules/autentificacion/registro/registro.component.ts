@@ -4,6 +4,8 @@ import { Usuario } from 'src/app/models/usuario';
 import { AuthService } from '../services/auth.service';
 // SERVICIO DE RUTAS QUE OTORGA ANGULAR
 import { Router } from '@angular/router';
+// SERIVICIO DE FIRESTORE 
+import { FirestoreService } from '../../shared/services/firestore.service';
 
 @Component({
   selector: 'app-registro',
@@ -29,8 +31,9 @@ export class RegistroComponent {
 
   //referenciamos a nuestros servicios
   constructor(
-    public servicioAuth: AuthService,
-    public servicioRutas: Router
+    public servicioAuth: AuthService, //metodos de autentificacion
+    public servicioRutas: Router, //metodo de navegacion 
+    public servicioFirestore: FirestoreService //vincula el uid con la coleccion
   ) { }
 
   //funcion para el registro
@@ -47,15 +50,12 @@ export class RegistroComponent {
       rol:this.usuarios.rol,
       password:this.usuarios.password
     }
-      */
 
     //enviamos los nuevos registros por medio del metodo push a la coleccion
-    /*
     this.coleccionUsuarios.push(credenciales);
 
     alert("Te registraste con exito");
 */
-
 
     const credenciales = {
       email: this.usuarios.email,
@@ -76,8 +76,29 @@ export class RegistroComponent {
         alert('Hubo un problema al registrar un nuevo usuario')
       })
 
+      //accede al servicio auth
+      const uid=await this.servicioAuth.obtenerUid();
+
+      //le envio el uid 
+      this.usuarios.uid=uid;
+
+    
+      this.guardarUsuario();
+
     //al terminar la funcion, limpio los inputs
     this.limpiarInputs();
+  }
+
+
+//funcion para agregar un NUEVO USUARIO
+  async guardarUsuario(){
+    this.servicioFirestore.agregarUsuario(this.usuarios, this.usuarios.uid)
+    .then(res=>{
+      console.log(this.usuarios);
+    })
+    .catch(err=>{
+      console.log('error =>', err);
+    })
   }
 
   //creo una funcion para limpiar los inputs
