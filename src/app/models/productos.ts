@@ -6,3 +6,5 @@ export interface Productos {
     nombre:string;
     tipo:string;
 }
+
+//a

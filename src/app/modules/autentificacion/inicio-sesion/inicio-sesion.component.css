@@ -13,3 +13,32 @@
     display: flex;
     flex-direction: column;
 }
+
+
+@media(min-width:300px) and (max-width:700px){
+    mat-toolbar{
+      background-color: crimson;
+    }
+  
+    #menuInicio{
+      display: none;
+    }
+    
+    #menuProducto{
+      display: none;
+    }
+
+    
+  }
+  
+  /* DISPOSITIVOS MAS GRANDES */
+  @media (min-width:700px) {
+    mat-toolbar{
+      background-color: darkcyan;
+    }
+  
+    #menuSecciones{
+      display: none;
+    }
+  }
+  
