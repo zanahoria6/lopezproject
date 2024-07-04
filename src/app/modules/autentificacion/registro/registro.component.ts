@@ -6,6 +6,8 @@ import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 // SERIVICIO DE FIRESTORE 
 import { FirestoreService } from '../../shared/services/firestore.service';
+// PAQUETERÍA DE CRIPTACIÓN
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-registro',
@@ -41,22 +43,6 @@ export class RegistroComponent {
   async registrar() {
     //credenciales = informacion que ingrese el usuario
 
-    /*
-    const credenciales={
-      uid:this.usuarios.uid,
-      nombre:this.usuarios.nombre,
-      apellido:this.usuarios.apellido,
-      email:this.usuarios.email,
-      rol:this.usuarios.rol,
-      password:this.usuarios.password
-    }
-
-    //enviamos los nuevos registros por medio del metodo push a la coleccion
-    this.coleccionUsuarios.push(credenciales);
-
-    alert("Te registraste con exito");
-*/
-
     const credenciales = {
       email: this.usuarios.email,
       password: this.usuarios.password
@@ -82,7 +68,12 @@ export class RegistroComponent {
       //le envio el uid 
       this.usuarios.uid=uid;
 
-    
+      /* SHA256 es un algoritmo de hashing seguro que toma una entrada (en este caso la contraseña) 
+      y produce una cadena de caracteres hexadecimal que representa su HASH */
+      //toString() convierte el resultado del HASH en una cadena de caracteres legibles
+      this.usuarios.password=CryptoJS.SHA256(this.usuarios.password).toString();
+  
+      //sube el usuario a la coleccion
       this.guardarUsuario();
 
     //al terminar la funcion, limpio los inputs

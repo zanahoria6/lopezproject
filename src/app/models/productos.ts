@@ -7,4 +7,4 @@ export interface Productos {
     tipo:string;
 }
 
-//a
+
