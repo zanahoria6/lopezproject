@@ -6,7 +6,7 @@ import { FirestoreService } from '../../shared/services/firestore.service';
 import { Router } from '@angular/router';
 
 import * as CryptoJS from 'crypto-js';
-
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -17,13 +17,13 @@ export class InicioSesionComponent {
 
   // Booleano para ocultar la contraseña
   hide = true;
-  
-  
-constructor(
+
+
+  constructor(
     public servicioAuth: AuthService,
     public servicioFirestore: FirestoreService,
     public servicioRutas: Router
-  ){}
+  ) { }
 
   usuariosIngresados: Usuario = {
     uid: "",
@@ -35,56 +35,79 @@ constructor(
 
   }
 
-  async IniciarSesion(){
+  async IniciarSesion() {
 
-    const credenciales={
-      email:this.usuariosIngresados.email,
-      password:this.usuariosIngresados.password
+    const credenciales = {
+      email: this.usuariosIngresados.email,
+      password: this.usuariosIngresados.password
     }
 
-    try{
-      const usuarioBD=await this.servicioAuth.obtenerUsuario(credenciales.email)
+    try {
+      const usuarioBD = await this.servicioAuth.obtenerUsuario(credenciales.email)
 
       // !-> si es diferente
       // .empty -> metodo de Firebase para marcar si algo es vacio
-      if(!usuarioBD||usuarioBD.empty){
-        alert ('El correo electronico no esta registrado')
+      if (!usuarioBD || usuarioBD.empty) {
+
+        Swal.fire({
+          title: "Error!",
+          text: "El usuario no esta registrado",
+          icon: "error"
+        });
+
         this.limpiarInputs()
-          return
-        
+        return
+
       }
       /* Primer documento (registro) en la coleccion de usuarios que se obtiene desde la consulta */
-      const usuarioDoc=usuarioBD.docs[0]
+      const usuarioDoc = usuarioBD.docs[0]
 
       //Extraer los datos del documento en forma de un objeto y se especifica como de tipo
       //'Usuario' -> haciendo referencia a nuestra interfaz de Usuario.
-      const usuarioData=usuarioDoc.data() as Usuario
+      const usuarioData = usuarioDoc.data() as Usuario
 
       //Hash de la contraseña ingresada por el usuario
-      const hashedPassword=CryptoJS.SHA256(credenciales.password).toString()
+      const hashedPassword = CryptoJS.SHA256(credenciales.password).toString()
 
-      if(hashedPassword!==usuarioData.password){
-        alert("contraseña incorrecta")
+      if (hashedPassword !== usuarioData.password) {
 
-        this.usuariosIngresados.password=''
+        Swal.fire({
+          title: "Error!",
+          text: "Hubo un problema con la contraseña",
+          icon: "error"
+        });
+
+        this.usuariosIngresados.password = ''
         return
       }
 
-      const res = await this.servicioAuth.iniciarSesion(credenciales.email,credenciales.password)
-    .then (res=>{
-      alert ('Se ha logueado con exito');
 
-      this.servicioRutas.navigate(['/inicio'])
-    })
-    .catch(err=>{
-      alert('Hubo un problema al iniciar sesion')
 
-      this.limpiarInputs();
-    })
-    
-    }catch{}
 
-    
+      const res = await this.servicioAuth.iniciarSesion(credenciales.email, credenciales.password)
+        .then(res => {
+
+          Swal.fire({
+            title: `¡Bienvenido, ${usuarioData.nombre}!`, // use templates para tomar el nombre de usuario desde la base de datos
+            text: "Inicio de sesion exitoso",
+            icon: "success"
+          });
+
+          this.servicioRutas.navigate(['/inicio'])
+        })
+        .catch(err => {
+          Swal.fire({
+            title: "Error!",
+            text: "Hubo un problema al iniciar sesion",
+            icon: "error"
+          });
+
+          this.limpiarInputs();
+        })
+
+    } catch { }
+
+
   }
 
   // Funcion para vaciar el formulario
@@ -95,5 +118,5 @@ constructor(
     }
   }
 
-  
+
 }
