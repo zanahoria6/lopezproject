@@ -1,10 +1,13 @@
 //creo la interfaz "Productos"
 export interface Productos {
-    id:string;
+    idProducto:string;
     imagen:string;
     precio:number;
     nombre:string;
-    tipo:string;
+    descripcion:string;
+    categoria:string;
+    alt:string;
+
 }
 
 

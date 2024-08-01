@@ -12,25 +12,31 @@ public info:Productos[]
 constructor(){
   this.info=[
     {
-      id:"",
+      idProducto:"",
       nombre:"Creatina en polvo ENA 300g",
       precio: 50000,
       imagen:"../../../../../assets/creatina-ena.jpg",
-      tipo:"Suplemento"
-    },
+      descripcion:"",
+      categoria:"",
+      alt:""
+        },
     {
-      id:"",
+      idProducto:"",
       nombre:"Proteina en polvo Whey 924g",
       precio: 30000,
       imagen:"../../../../../assets/Proteina-Whey.webp",
-      tipo:"Suplemento"
+      descripcion:"",
+      categoria:"",
+      alt:""
     },
     {
-      id:"",
+      idProducto:"",
       nombre:"Preentreno psycotic gold 215g",
       precio: 30000,
       imagen:"../../../../../assets/Preentreno-psychoticgold.webp",
-      tipo:"Suplemento"
+      descripcion:"",
+      categoria:"",
+      alt:""
     }
   ]
 }

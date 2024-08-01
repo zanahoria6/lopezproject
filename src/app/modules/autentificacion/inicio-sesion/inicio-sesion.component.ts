@@ -43,7 +43,7 @@ export class InicioSesionComponent {
     }
 
     try {
-      const usuarioBD = await this.servicioAuth.obtenerUsuario(credenciales.email)
+      const usuarioBD = await this.servicioAuth.obtenerUsuario(credenciales.email);
 
       // !-> si es diferente
       // .empty -> metodo de Firebase para marcar si algo es vacio
@@ -55,19 +55,19 @@ export class InicioSesionComponent {
           icon: "error"
         });
 
-        this.limpiarInputs()
-        return
+        this.limpiarInputs();
+        return;
 
       }
       /* Primer documento (registro) en la coleccion de usuarios que se obtiene desde la consulta */
-      const usuarioDoc = usuarioBD.docs[0]
+      const usuarioDoc = usuarioBD.docs[0];
 
       //Extraer los datos del documento en forma de un objeto y se especifica como de tipo
       //'Usuario' -> haciendo referencia a nuestra interfaz de Usuario.
-      const usuarioData = usuarioDoc.data() as Usuario
+      const usuarioData = usuarioDoc.data() as Usuario;
 
       //Hash de la contraseña ingresada por el usuario
-      const hashedPassword = CryptoJS.SHA256(credenciales.password).toString()
+      const hashedPassword = CryptoJS.SHA256(credenciales.password).toString();
 
       if (hashedPassword !== usuarioData.password) {
 
@@ -77,8 +77,8 @@ export class InicioSesionComponent {
           icon: "error"
         });
 
-        this.usuariosIngresados.password = ''
-        return
+        this.usuariosIngresados.password = '';
+        return;
       }
 
 
@@ -93,7 +93,7 @@ export class InicioSesionComponent {
             icon: "success"
           });
 
-          this.servicioRutas.navigate(['/inicio'])
+          this.servicioRutas.navigate(['/inicio']);
         })
         .catch(err => {
           Swal.fire({
@@ -117,6 +117,4 @@ export class InicioSesionComponent {
       password: this.usuariosIngresados.password = ''
     }
   }
-
-
 }

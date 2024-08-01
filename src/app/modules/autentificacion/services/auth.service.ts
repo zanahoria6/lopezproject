@@ -56,7 +56,7 @@ export class AuthService {
 
   // Funcion que busca un usuario en la coleccion de 'usuarios' cuyo correo electronico coincida con el valor proporcionado
   obtenerUsuario(email:string){
-    return this.servicioFirestore.collection('usuarios', ref=>ref.where('email','==',email)).get().toPromise()
+    return this.servicioFirestore.collection('usuarios', ref=>ref.where('email','==',email)).get().toPromise();
       
     
   }
