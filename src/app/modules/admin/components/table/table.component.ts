@@ -28,4 +28,34 @@ export class TableComponent {
   }) 
 
   constructor(public servicioCrud:CrudService){}
+
+  ngOnInit():void{
+    // subscribe notifica constantemente los cambios actuales del sistema 
+    this.servicioCrud.obtenerProducto().subscribe(producto=>{
+      this.coleccionProductos=producto;
+    })
+  }
+ async agregarProducto(){
+  // validamos los valores del producto agregado
+  if(this.producto.valid){
+    let nuevoProducto: Productos={
+      // idProducto no se toma porque es generado por la BD y no por el usuario
+      idProducto:'',
+      // el resto es tomado con informacion ingresada por el usuario
+      nombre:this.producto.value.nombre!,
+      descripcion:this.producto.value.descripcion!,
+      precio:this.producto.value.precio!,
+      categoria:this.producto.value.categoria!,
+      imagen:this.producto.value.imagen!,
+      alt:this.producto.value.alt!
+    }
+    await this.servicioCrud.crearProducto(nuevoProducto)
+    .then(producto=>{
+      alert ("Ha agregado un nuevo producto con exito")
+    })
+    .catch(error=>{
+      alert("Hubo un error al agregar un nuevo producto")
+    })
+  }
+  }
 }

@@ -18,10 +18,11 @@
             <td>
                 <img src="{{producto.imagen}}" alt="{{producto.alt}}">
             </td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            
+            <td>{{producto.precio}}</td>
+            <td>{{producto.nombre}}</td>
+            <td>{{producto.descripcion}}</td>
+            <td>{{producto.categoria}}</td>
 
             <!-- ACCIONES -->
             <td>
@@ -37,3 +38,56 @@
         </tr>
     </tbody>
 </table>
+
+<!-- BOTON PARA AGREGAR PRODUCTOS -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarProducto">
+    Launch demo modal
+  </button>
+  
+  <!-- MODAL PARA AGREGAR PRODUCTOS -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- ENCABEZADO MODAL -->
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Ingrese un nuevo producto</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <!-- CUERPO DEL MODAL -->
+        <div [formGroup]="producto" class="modal-body">
+          <div class="mb-3">
+            <label class="form-label">Ingrese el nombre del producto</label>
+            <input type="text" class="form-control" formControlName="nombre" placeholder="Ej: Risotto"> 
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Ingrese el precio del producto</label>
+            <input type="number" class="form-control" formControlName="precio" placeholder="Ej: 1200"> 
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Ingrese la descripcion del producto</label>
+            <input type="text" class="form-control" formControlName="descripcion" placeholder="Ej: salado"> 
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Seleccione la categoria del producto</label>
+            <select class="form-control" class="form-select" formControlName="Categoria">
+                <option selected>Elija una opcion</option>
+                <option value="receta">Recetas</option>
+                <option value="arroz">Arroz</option>
+                <option value="buso">Buso</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Ingrese una imagen</label>
+            <input type="text" class="form-control" formControlName="imagen" placeholder="Ingrese vinculo de una imagen"> 
+          </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Guardar</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
