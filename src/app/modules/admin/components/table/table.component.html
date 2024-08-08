@@ -41,11 +41,11 @@
 
 <!-- BOTON PARA AGREGAR PRODUCTOS -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarProducto">
-    Launch demo modal
+    Agregar nuevo producto
   </button>
   
   <!-- MODAL PARA AGREGAR PRODUCTOS -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="agregarProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
 
@@ -59,19 +59,19 @@
         <div [formGroup]="producto" class="modal-body">
           <div class="mb-3">
             <label class="form-label">Ingrese el nombre del producto</label>
-            <input type="text" class="form-control" formControlName="nombre" placeholder="Ej: Risotto"> 
+            <input type="text" class="form-control" formControlName="nombre" placeholder="Ingrese el nombre"> 
           </div>
           <div class="mb-3">
             <label class="form-label">Ingrese el precio del producto</label>
-            <input type="number" class="form-control" formControlName="precio" placeholder="Ej: 1200"> 
+            <input type="number" class="form-control" formControlName="precio" placeholder="Ingrese el valor"> 
           </div>
           <div class="mb-3">
             <label class="form-label">Ingrese la descripcion del producto</label>
-            <input type="text" class="form-control" formControlName="descripcion" placeholder="Ej: salado"> 
+            <input type="text" class="form-control" formControlName="descripcion" placeholder="Ingrese la descripcion"> 
           </div>
           <div class="mb-3">
             <label class="form-label">Seleccione la categoria del producto</label>
-            <select class="form-control" class="form-select" formControlName="Categoria">
+            <select class="form-control" class="form-select" formControlName="categoria">
                 <option selected>Elija una opcion</option>
                 <option value="receta">Recetas</option>
                 <option value="arroz">Arroz</option>
@@ -85,7 +85,7 @@
         </div>
 
         <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Guardar</button>
+            <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="agregarProducto()">Guardar</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         </div>
       </div>
