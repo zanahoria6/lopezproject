@@ -6,6 +6,8 @@ import { ProductoComponent } from './pages/producto/producto.component';
 import { SuplementosComponent } from './pages/suplementos/suplementos.component';
 import { AccesoriosComponent } from './pages/accesorios/accesorios.component';
 import { IndumentariaComponent } from './pages/indumentaria/indumentaria.component';
+import { CardComponent } from './components/card/card.component';
+import { CardJuguetesComponent } from './components/card-juguetes/card-juguetes.component';
 
 
 @NgModule({
@@ -13,7 +15,9 @@ import { IndumentariaComponent } from './pages/indumentaria/indumentaria.compone
     ProductoComponent,
     SuplementosComponent,
     AccesoriosComponent,
-    IndumentariaComponent
+    IndumentariaComponent,
+    CardComponent,
+    CardJuguetesComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +27,9 @@ import { IndumentariaComponent } from './pages/indumentaria/indumentaria.compone
     ProductoComponent,
     SuplementosComponent,
     AccesoriosComponent,
-    IndumentariaComponent
+    IndumentariaComponent,
+    CardComponent,
+    CardJuguetesComponent
   ]
 })
 export class ProductoModule { }

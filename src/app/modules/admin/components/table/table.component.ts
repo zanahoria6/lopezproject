@@ -58,10 +58,13 @@ export class TableComponent {
       await this.servicioCrud.crearProducto(nuevoProducto)
         .then(producto => {
           alert("Ha agregado un nuevo producto con exito")
+
+          // Limpiamos el formulario
+          this.producto.reset();
         })
         .catch(error => {
           alert("Hubo un error al agregar un nuevo producto")
-        })
+         })
     }
   }
 
@@ -74,12 +77,44 @@ export class TableComponent {
   // Funcion para eliminar definitivamente al producto
   borrarProducto() {
     this.servicioCrud.eliminarProducto(this.productoSeleccionado.idProducto)
-      .then(respuesta => {
-        alert("El producto se ha eliminado correctamente")
-      })
-      .catch(error => {
-        alert("No se ha podido eliminar el producto \n" + error)
-      })
+      // .then(respuesta => {
+      //   alert("El producto se ha eliminado correctamente")
+      // })
+      // .catch(error => {
+      //   alert("No se ha podido eliminar el producto \n" + error)
+      // })
+  }
+
+  mostrarEditar(productoSeleccionado:Productos){
+    this.productoSeleccionado=productoSeleccionado;
+    //! setear los nuevos valores para reasignarlos y el id no se vuelve a enviar ni se modifica, por ende no lo llamamos
+    this.producto.setValue({
+      nombre:productoSeleccionado.nombre,
+      precio:productoSeleccionado.precio,
+      descripcion:productoSeleccionado.descripcion,
+      imagen:productoSeleccionado.imagen,
+      alt:productoSeleccionado.alt,
+      categoria:productoSeleccionado.categoria
+    })
+  }
+
+  editarProducto(){
+    let datos: Productos={
+      idProducto:this.productoSeleccionado.idProducto,
+      nombre:this.producto.value.nombre!,
+      precio:this.producto.value.precio!,
+      descripcion:this.producto.value.descripcion!,
+      imagen:this.producto.value.imagen!,
+      alt:this.producto.value.alt!,
+      categoria:this.producto.value.categoria!
+    }
+     this.servicioCrud.modificarProducto(this.productoSeleccionado.idProducto, datos)
+    // .then(producto=>{
+    //   alert('El producto fue modificado con exito')
+    // })
+    // .catch(error=>{
+    //   alert('Hubo un problema para modificar el producto')
+    // })
   }
 }
 
