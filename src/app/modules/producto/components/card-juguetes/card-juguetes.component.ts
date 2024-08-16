@@ -24,14 +24,16 @@ export class CardJuguetesComponent {
   ngOnInit(): void{
     this.servicioCrud.obtenerProducto().subscribe(producto=>{
       this.coleccionProductos=producto
+
+      this.mostrarProductoJuguete()
     })
     // Mostrar la coleccion actual de juguetes
   }
 
   mostrarProductoJuguete(){
     this.coleccionProductos.forEach(producto=>{
-      // Si la categoria del producto es igual a "indumentaria", se enviara a la coleccion de jugetes especifica
-      if(producto.categoria==="indumentaria"){
+      // Si la categoria del producto es igual a "arroz", se enviara a la coleccion de jugetes especifica
+      if(producto.categoria==="arroz"){
         // .push: sube o agrega un item a una coleccion
         this.coleccionJuguetes.push(producto);
       }
